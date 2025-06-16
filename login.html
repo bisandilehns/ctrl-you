@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: '', sans-serif;
+      background-color: #f8f5e9; 
+      color: #2e3d32;
+    }
+    
+    .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .back-arrow {
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      color: #2e3d32;  
+    }
+
+    h1 {
+       text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="homepage.html" class="back-arrow">←</a>
+        <h1>Login</h1>
+    </div>
+    <form>
+  <label for="email">Email</label><br>
+  <input type="email" id="email" name="email" required><br><br>
+
+  <label for="password">Password</label><br>
+  <input type="password" id="password" name="password" required><br><br>
+
+  <button type="submit">Login</button>
+</form>
+
+</body>
