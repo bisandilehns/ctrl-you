@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #f8f5e9;
+      --text-color: #2e3d32;
+      --card-bg: #ffffff;
+      --accent-color: #3f4e44;
+      --secondary-color: #728c80;
+      --highlight-color: #2e3d32;
+    }
+
+    body.dark {
+      --bg-color: #2e3d32;
+      --text-color: #ffffff;
+      --card-bg: #3f4e44;
+      --accent-color: #728c80;
+      --secondary-color: #3f4e44;
+      --highlight-color: #728c80;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 15px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    #theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-color);
+      padding: 5px;
+    }
+
+    .tip {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .quote {
+      color: var(--text-color);
+      font-style: italic;
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .card-custom {
+      flex: 1;
+      background-color: var(--card-bg);
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-custom h5 {
+      margin: 8px 0;
+      font-size: 1.1rem;
+    }
+
+    .card-custom small {
+      color: var(--secondary-color);
+      font-size: 0.85rem;
+    }
+
+    .progress-circle {
+      width: 80%;
+      max-width: 150px;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      border: 6px solid var(--highlight-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 25px;
+    }
+
+    .progress-circle h3 {
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    .progress-circle small {
+      font-size: 0.9rem;
+      color: var(--secondary-color);
+    }
+
+    .breathe-btn {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 12px;
+      width: 100%;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-bottom: 15px;
+      transition: transform 0.2s;
+    }
+
+    .breathe-btn:active {
+      transform: scale(0.98);
+    }
+
+    .streak {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--highlight-color);
+    }
+    @media (max-width: 480px) {
+      .container {
+        padding: 10px;
+      }
+      
+      .stats {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .progress-circle {
+        max-width: 120px;
+        border-width: 5px;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        max-width: 450px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Hi <span id="username">{{ username }}</span></h2>
+      <button id="theme-toggle">☀︎</button>
+    </div>
+
+    <div class="tip">Tip: Stand up and stretch for a minute!</div>
+    <div class="quote">Balance is not something you find, it's something you create.</div>
+
+    <div class="stats">
+      <div class="card-custom">
+        <p>📱 Top app</p>
+        <h5>Instagram</h5>
+        <small>(2h 45m)</small>
+      </div>
+      <div class="card-custom">
+        <p>⏱ Time saved</p>
+        <h5>50m</h5>
+      </div>
+    </div>
+
+    <div class="progress-circle">
+      <h3>4/8</h3>
+      <small>hrs</small>
+    </div>
+
+    <button class="breathe-btn">Breathe & Relax</button>
+    <p class="streak">🏆 5-Day Streak!</p>
+  </div>
+
+  <script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const body = document.body;
+
+ 
+    if (localStorage.getItem('darkMode') === 'true') {
+      body.classList.add('dark');
+      toggleButton.textContent = '⏾';
+    }
+
+    toggleButton.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      const isDark = body.classList.contains('dark');
+      toggleButton.textContent = isDark ? '⏾' : '☀︎';
+      localStorage.setItem('darkMode', isDark);
+    });
+
+
+  </script>
+</body>
+</html>
