@@ -34,6 +34,7 @@
       min-height: 100vh;
       padding: 20px;
       box-sizing: border-box;
+      padding-bottom: 80px;
     }
 
     .container {
@@ -201,19 +202,65 @@
       cursor: pointer;
     }
 
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #e8e5d8;; 
+  border-top: 1px solid var(--secondary-color);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 0;
+  box-shadow: 0 -2px 6px rgba(34, 79, 46, 0.212);
+  z-index: 100;
+}
+
+
+    .nav-item {
+      text-align: center;
+      text-decoration: none;
+      color: var(--text-color);
+      flex: 1;
+    }
+
+    .nav-item img.nav-icon {
+      width: 28px;
+      height: 28px;
+      display: block;
+      margin: 0 auto 4px;
+    }
+
+    .nav-item p {
+      margin: 0;
+      font-size: 0.7rem;
+    }
+
+    .nav-item.active {
+      color: var(--accent-color);
+    }
+
     @media (max-width: 480px) {
       .container { padding: 10px; }
       .stats { flex-direction: column; gap: 10px; }
       .progress-circle { max-width: 120px; border-width: 5px; }
       h2 { font-size: 1.3rem; }
+      .nav-item img.nav-icon { width: 24px; height: 24px; }
+      .nav-item p { font-size: 0.65rem; }
     }
 
     @media (min-width: 768px) {
       .container { max-width: 450px; }
     }
+
+
   </style>
 </head>
 <body>
+  <div class="hamburger" id="hamburger">
+  
+  </div>
   <div class="container">
     <div class="header">
       <h2>Welcome {{ username }}</h2>
@@ -248,11 +295,23 @@
     <div class="calm-box">
       🫁 Take a deep breath... you're doing great.
     </div>
-  
-
-   
   </div>
 
+   <nav class="bottom-nav">
+    <a href="homepage.html" class="nav-item">
+  <img src="home.png" alt="Home" class="nav-icon">
+  <p>Home</p>
+    </a>
+     <a href="tip.html" class="nav-item">
+     <img src="tip.png" alt="Tips" class="nav-icon">
+    <p>Tip</p>
+    </a>
+    <a href="userprofile.html" class="nav-item">
+     <img src="profile.png" alt="Profile" class="nav-icon">
+    <p>Profile</p>
+    </a>
+    </nav>
+    
   <script>
     const checkbox = document.getElementById("checkbox");
     checkbox.addEventListener("change", () => {
