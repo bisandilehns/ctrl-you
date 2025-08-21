@@ -251,21 +251,22 @@
       cursor: pointer;
     }
 
-    .side-menu {
-      position: fixed;
-      top: 0;
-      left: -250px; 
-      width: 250px;
-      height: 100%;
-      background-color: var(--card-bg);
-      box-shadow: 2px 0 8px rgba(0,0,0,0.2);
-      padding-top: 60px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      transition: left 0.3s ease;
-      z-index: 150;
-    }
+   .side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px; 
+  width: 250px;
+  height: 100%;
+  background-color: #dedac9; 
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: left 0.3s ease;
+  z-index: 150;
+}
+
 
     .side-menu a {
       padding: 12px 20px;
@@ -362,35 +363,48 @@
     </a>
   </nav>
 
-  <script>
-    const checkbox = document.getElementById("checkbox");
-    checkbox.addEventListener("change", () => {
-      document.body.classList.toggle("dark");
+<script>
+  const checkbox = document.getElementById("checkbox");
+  checkbox.addEventListener("change", () => {
+    document.body.classList.toggle("dark");
+  });
+
+  const goalInput = document.getElementById('goal');
+  const usedInput = document.getElementById('used');
+  const updateButton = document.getElementById('update-progress');
+  const progressDisplay = document.getElementById('progress-display');
+
+  if (localStorage.getItem('goal') && localStorage.getItem('used')) {
+    progressDisplay.textContent = `${localStorage.getItem('used')}/${localStorage.getItem('goal')}`;
+  }
+
+  updateButton.addEventListener('click', () => {
+    const goal = goalInput.value || 0;
+    const used = usedInput.value || 0;
+    progressDisplay.textContent = `${used}/${goal}`;
+    localStorage.setItem('goal', goal);
+    localStorage.setItem('used', used);
+  });
+
+  const hamburger = document.getElementById("hamburger");
+  const sideMenu = document.getElementById("side-menu");
+
+
+  hamburger.addEventListener("click", (event) => {
+    sideMenu.classList.toggle("open");
+    event.stopPropagation(); 
+  });
+
+  const menuLinks = sideMenu.querySelectorAll('a');
+  menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      sideMenu.classList.remove('open');
     });
+  });
 
-    const goalInput = document.getElementById('goal');
-    const usedInput = document.getElementById('used');
-    const updateButton = document.getElementById('update-progress');
-    const progressDisplay = document.getElementById('progress-display');
-
-    if (localStorage.getItem('goal') && localStorage.getItem('used')) {
-      progressDisplay.textContent = `${localStorage.getItem('used')}/${localStorage.getItem('goal')}`;
+  document.addEventListener('click', (event) => {
+    if (!sideMenu.contains(event.target) && !hamburger.contains(event.target)) {
+      sideMenu.classList.remove('open');
     }
-
-    updateButton.addEventListener('click', () => {
-      const goal = goalInput.value || 0;
-      const used = usedInput.value || 0;
-      progressDisplay.textContent = `${used}/${goal}`;
-      localStorage.setItem('goal', goal);
-      localStorage.setItem('used', used);
-    });
-
-    const hamburger = document.getElementById("hamburger");
-    const sideMenu = document.getElementById("side-menu");
-
-    hamburger.addEventListener("click", () => {
-      sideMenu.classList.toggle("open");
-    });
-  </script>
-</body>
-</html>
+  });
+</script>
