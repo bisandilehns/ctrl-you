@@ -349,29 +349,26 @@
   </nav>
 
   <nav class="bottom-nav">
-    <a href="homepage.html" class="nav-item">
-      <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home" class="nav-icon">
-      <p>Home</p>
-    </a>
-  <a href="{{ url_for('tip') }}" class="nav-item">
-  <img src="{{ url_for('static', filename='images/tip.png') }}" alt="Tips" class="nav-icon">
-  <p>Tip</p>
-</a>
-
-
-    <a href="userprofile.html" class="nav-item">
-      <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile" class="nav-icon">
-      <p>Profile</p>
-    </a>
-  </nav>
+  <a href="homepage.html" class="nav-item">
+    <img src="static/images/home.png" alt="Home" class="nav-icon">
+    <p>Home</p>
+  </a>
+  <a href="tip.html" class="nav-item">
+    <img src="static/images/tip.png" alt="Tips" class="nav-icon">
+    <p>Tips</p>
+  </a>
+  <a href="userprofile.html" class="nav-item">
+    <img src="static/images/profile.png" alt="Profile" class="nav-icon">
+    <p>Profile</p>
+  </a>
+</nav>
 
 <script>
   const checkbox = document.getElementById("checkbox");
   checkbox.addEventListener("change", () => {
     document.body.classList.toggle("dark");
   });
-
-  const goalInput = document.getElementById('goal');
+const goalInput = document.getElementById('goal');
   const usedInput = document.getElementById('used');
   const updateButton = document.getElementById('update-progress');
   const progressDisplay = document.getElementById('progress-display');

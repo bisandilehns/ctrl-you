@@ -116,6 +116,15 @@
       color: var(--accent-color);
     }
 
+    /* Dark mode heading and text improvements */
+    body.dark .tip-card h3 {
+      color: #ffffff;
+    }
+
+    body.dark .tip-card p {
+      color: #e0e0e0;
+    }
+
     .tip-card p {
       margin: 0;
       font-size: 0.95rem;
@@ -222,23 +231,23 @@
     <div class="tips-container">
       <div class="tip-card">
         <h3>Set App Limits</h3>
-        <p>Use built-in screen time tools to set daily limits for apps that take up too much of your time.</p>
+        <p>Use built-in screen time tools to set daily limits for apps that take up too much of your time. Adjust these limits weekly based on your usage to stay balanced without cutting out essential apps.</p>
       </div>
       <div class="tip-card">
         <h3>No Phone in Bed</h3>
-        <p>Charge your phone outside the bedroom to avoid late-night scrolling and sleep better.</p>
+        <p>Charge your phone outside the bedroom to avoid late-night scrolling and improve your sleep quality. Try keeping a notebook nearby for any late-night ideas instead of reaching for your phone.</p>
       </div>
       <div class="tip-card">
         <h3>Replace Scrolling</h3>
-        <p>Keep a book, puzzle, or journal nearby so you have a fun alternative when you’re bored.</p>
+        <p>Keep a book, puzzle, or journal nearby so you have a fun alternative when you’re bored. Even small hobbies like sketching or listening to music can break the scrolling habit.</p>
       </div>
       <div class="tip-card">
         <h3>Tech-Free Breaks</h3>
-        <p>Take short walks or stretch without your phone. Even 5 minutes can make a difference.</p>
+        <p>Take short walks, stretch, or do breathing exercises without your phone. Even 5-10 minutes of focused relaxation can boost your mood and productivity.</p>
       </div>
       <div class="tip-card">
         <h3>Track Your Progress</h3>
-        <p>Check your screen time weekly and celebrate small improvements.</p>
+        <p>Check your screen time weekly and celebrate small improvements. Reflect on what triggers extra screen time and plan strategies to reduce it gradually.</p>
       </div>
     </div>
   </div>
@@ -252,23 +261,22 @@
     <a href="#">Log out</a>
   </nav>
 
-  <nav class="bottom-nav">
-    <a href="homepage.html" class="nav-item">
-      <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home" class="nav-icon">
-      <p>Home</p>
-    </a>
-    <a href="tip.html" class="nav-item active">
-      <img src="{{ url_for('static', filename='images/tip.png') }}" alt="Tips" class="nav-icon">
-      <p>Tips</p>
-    </a>
-    <a href="userprofile.html" class="nav-item">
-      <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile" class="nav-icon">
-      <p>Profile</p>
-    </a>
-  </nav>
+    <nav class="bottom-nav">
+  <a href="homepage.html" class="nav-item">
+    <img src="static/images/home.png" alt="Home" class="nav-icon">
+    <p>Home</p>
+  </a>
+  <a href="tip.html" class="nav-item">
+    <img src="static/images/tip.png" alt="Tips" class="nav-icon">
+    <p>Tips</p>
+  </a>
+  <a href="userprofile.html" class="nav-item">
+    <img src="static/images/profile.png" alt="Profile" class="nav-icon">
+    <p>Profile</p>
+  </a>
+</nav>
 
   <script>
-
     const checkbox = document.getElementById("checkbox");
     checkbox.addEventListener("change", () => {
       document.body.classList.toggle("dark");

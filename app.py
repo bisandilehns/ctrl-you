@@ -73,4 +73,5 @@ def logout():
 def tip():
     username = session.get('username', 'User')
     return render_template('tip.html', username=username)
+    
 
