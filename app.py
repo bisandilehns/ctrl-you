@@ -69,9 +69,14 @@ def signup():
 def logout():
     session.pop('username', None)
     return redirect(url_for("login"))
+
 @app.route('/tip')
 def tip():
     username = session.get('username', 'User')
     return render_template('tip.html', username=username)
     
+@app.route('/userprofile')
+def userprofile():
+    username = session.get('username', 'User')
+    return render_template("userprofile.html", username=username)
 

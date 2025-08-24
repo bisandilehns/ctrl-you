@@ -348,20 +348,21 @@
     <a href="#">Log out</a>
   </nav>
 
-  <nav class="bottom-nav">
-  <a href="homepage.html" class="nav-item">
-    <img src="static/images/home.png" alt="Home" class="nav-icon">
+<nav class="bottom-nav">
+  <a href="{{ url_for('homepage') }}" class="nav-item">
+    <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home" class="nav-icon">
     <p>Home</p>
   </a>
-  <a href="tip.html" class="nav-item">
-    <img src="static/images/tip.png" alt="Tips" class="nav-icon">
+  <a href="{{ url_for('tip') }}" class="nav-item">
+    <img src="{{ url_for('static', filename='images/tip.png') }}" alt="Tips" class="nav-icon">
     <p>Tips</p>
   </a>
-  <a href="userprofile.html" class="nav-item">
-    <img src="static/images/profile.png" alt="Profile" class="nav-icon">
+  <a href="{{ url_for('userprofile') }}" class="nav-item">
+    <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile" class="nav-icon">
     <p>Profile</p>
   </a>
 </nav>
+
 
 <script>
   const checkbox = document.getElementById("checkbox");
