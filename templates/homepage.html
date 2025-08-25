@@ -15,7 +15,6 @@
       --secondary-color: #728c80;
       --highlight-color: #2e3d32;
     }
-
     body.dark {
       --bg-color: #000000; 
       --text-color: #ffffff;
@@ -24,7 +23,6 @@
       --secondary-color: #444444;
       --highlight-color: #ffffff;
     }
-
     body {
       margin: 0;
       font-family: 'Arial', sans-serif;
@@ -36,33 +34,22 @@
       box-sizing: border-box;
       padding-bottom: 80px;
     }
-
     .container {
       width: 100%;
       max-width: 500px;
       margin: 0 auto;
       padding: 15px;
     }
-
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
     }
-
-    h2 {
-      font-size: 1.5rem;
-      margin: 0;
-      flex: 1;
-      text-align: center;
-    }
-
-    .checkbox {
+.checkbox {
       opacity: 0;
       position: absolute;
     }
-
     .checkbox-label {
       background-color: #111; 
       width: 50px;
@@ -75,10 +62,8 @@
       justify-content: space-between;
       align-items: center;
     }
-
     .fa-moon { color: #f1c40f; }
     .fa-sun { color: #f39c12; }
-
     .checkbox-label .ball {
       background-color: #fff;
       width: 22px;
@@ -89,11 +74,9 @@
       border-radius: 50%;
       transition: transform 0.2s linear;
     }
-
     .checkbox:checked + .checkbox-label .ball {
       transform: translateX(24px);
     }
-
     .tip {
       background-color: var(--accent-color);
       color: white;
@@ -103,7 +86,6 @@
       text-align: center;
       font-size: 0.95rem;
     }
-
     .quote {
       color: var(--text-color);
       font-style: italic;
@@ -112,14 +94,12 @@
       font-size: 0.95rem;
       opacity: 0.9;
     }
-
     .stats {
       display: flex;
       justify-content: space-between;
       gap: 15px;
       margin-bottom: 25px;
     }
-
     .card-custom {
       flex: 1;
       background-color: var(--card-bg);
@@ -128,17 +108,14 @@
       text-align: center;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
-
     .card-custom h5 {
       margin: 8px 0;
       font-size: 1.1rem;
     }
-
     .card-custom small {
       color: var(--secondary-color);
       font-size: 0.85rem;
     }
-
     .progress-circle {
       width: 80%;
       max-width: 150px;
@@ -151,17 +128,14 @@
       align-items: center;
       margin: 0 auto 25px;
     }
-
     .progress-circle h3 {
       font-size: 1.8rem;
       margin: 0;
     }
-
     .progress-circle small {
       font-size: 0.9rem;
       color: var(--secondary-color);
     }
-
     .calm-box {
       background-color: var(--accent-color);
       color: white;
@@ -171,20 +145,17 @@
       font-size: 1rem;
       margin-bottom: 15px;
     }
-
     .streak {
       text-align: center;
       font-size: 1rem;
       color: var(--highlight-color);
     }
-
     .goal-inputs {
       display: flex;
       justify-content: center;
       gap: 10px;
       margin-bottom: 20px;
     }
-
     .goal-inputs input {
       width: 120px;
       padding: 10px;
@@ -193,7 +164,6 @@
       border: 1px solid #ccc;
       border-radius: 6px;
     }
-
     .goal-inputs button {
       padding: 10px 15px;
       font-size: 1rem;
@@ -203,7 +173,6 @@
       border-radius: 6px;
       cursor: pointer;
     }
-
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -218,30 +187,25 @@
       box-shadow: 0 -2px 6px rgba(34, 79, 46, 0.212);
       z-index: 100;
     }
-
     .nav-item {
       text-align: center;
       text-decoration: none;
       color: var(--text-color);
       flex: 1;
     }
-
     .nav-item img.nav-icon {
       width: 28px;
       height: 28px;
       display: block;
       margin: 0 auto 4px;
     }
-
     .nav-item p {
       margin: 0;
       font-size: 0.7rem;
     }
-
     .nav-item.active {
       color: var(--accent-color);
     }
-
     .hamburger {
       width: 30px;
       height: 26px;
@@ -250,7 +214,6 @@
       align-items: center;
       cursor: pointer;
     }
-
    .side-menu {
   position: fixed;
   top: 0;
@@ -266,25 +229,20 @@
   transition: left 0.3s ease;
   z-index: 150;
 }
-
-
     .side-menu a {
       padding: 12px 20px;
       text-decoration: none;
       color: var(--text-color);
       font-size: 1rem;
     }
-
     .side-menu a:hover {
       background-color: var(--accent-color);
       color: white;
       border-radius: 4px;
     }
-
     .side-menu.open {
       left: 0;
     }
-
     @media (max-width: 480px) {
       .container { padding: 10px; }
       .stats { flex-direction: column; gap: 10px; }
@@ -293,7 +251,6 @@
       .nav-item img.nav-icon { width: 24px; height: 24px; }
       .nav-item p { font-size: 0.65rem; }
     }
-
     @media (min-width: 768px) {
       .container { max-width: 450px; }
     }
@@ -305,7 +262,6 @@
       <div class="hamburger" id="hamburger">
         <img src="static/images/menu.png" alt="Menu" style="width:26px; height:26px;">
       </div>
-      <h2>Welcome {{ username }}</h2>
       <div>
         <input type="checkbox" class="checkbox" id="checkbox">
         <label for="checkbox" class="checkbox-label">
@@ -315,30 +271,24 @@
         </label>
       </div>
     </div>
-
     <div class="tip">Tip: Stand up and stretch for a minute!</div>
     <div class="quote">Balance is not something you find, it's something you create.</div>
-
     <p style="text-align:center; margin-bottom:10px; font-size:0.95rem;">
       Add your screen time goal and how many hours you’ve used today, then press "Update".
     </p>
-
     <div class="goal-inputs">
       <input type="number" id="goal" placeholder="Goal (hrs)">
       <input type="number" id="used" placeholder="Used (hrs)">
       <button id="update-progress">Update</button>
     </div>
-
     <div class="progress-circle">
       <h3 id="progress-display">0/0</h3>
       <small>hrs</small>
     </div>
-
     <div class="calm-box">
       🫁 Take a deep breath... you're doing great.
     </div>
   </div>
-
   <nav class="side-menu" id="side-menu">
     <a href="#">About the app</a>
     <a href="#">Goals</a>
@@ -347,7 +297,6 @@
     <a href="#">Feedback</a>
     <a href="#">Log out</a>
   </nav>
-
 <nav class="bottom-nav">
   <a href="{{ url_for('homepage') }}" class="nav-item">
     <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home" class="nav-icon">
@@ -357,13 +306,12 @@
     <img src="{{ url_for('static', filename='images/tip.png') }}" alt="Tips" class="nav-icon">
     <p>Tips</p>
   </a>
-  <a href="{{ url_for('userprofile') }}" class="nav-item">
+  <a href="{{ url_for('login') }}" class="nav-item">
     <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile" class="nav-icon">
     <p>Profile</p>
+</a>
   </a>
 </nav>
-
-
 <script>
   const checkbox = document.getElementById("checkbox");
   checkbox.addEventListener("change", () => {
@@ -388,20 +336,16 @@ const goalInput = document.getElementById('goal');
 
   const hamburger = document.getElementById("hamburger");
   const sideMenu = document.getElementById("side-menu");
-
-
   hamburger.addEventListener("click", (event) => {
     sideMenu.classList.toggle("open");
     event.stopPropagation(); 
   });
-
   const menuLinks = sideMenu.querySelectorAll('a');
   menuLinks.forEach(link => {
     link.addEventListener('click', () => {
       sideMenu.classList.remove('open');
     });
   });
-
   document.addEventListener('click', (event) => {
     if (!sideMenu.contains(event.target) && !hamburger.contains(event.target)) {
       sideMenu.classList.remove('open');

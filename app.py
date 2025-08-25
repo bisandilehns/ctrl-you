@@ -6,9 +6,7 @@ app.secret_key = 'your_secret_key_here'
 
 @app.route('/')
 def homepage():
-   
-    username = session.get('username', 'User')
-    return render_template("homepage.html", username=username)
+    return render_template("homepage.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -16,7 +14,6 @@ def login():
         username = request.form.get("username", "")
         password = request.form.get("password", "")
          
-    
         if not username.isalpha():
             flash("Username must contain only letters.")
             return redirect(url_for("login"))
@@ -25,7 +22,6 @@ def login():
             flash("Password must be more than 6 characters.")
             return redirect(url_for("login"))
 
-    
         session['username'] = username
 
         print("username:", username)
@@ -42,7 +38,6 @@ def signup():
         password = request.form.get("password", "")
         confirm = request.form.get("confirm", "")
 
-
         if not username.isalpha():
             flash("Username must contain only letters.")
             return redirect(url_for("signup"))
@@ -55,7 +50,6 @@ def signup():
             flash("Password and confirm password do not match.")
             return redirect(url_for("signup"))
 
-   
         print("name:", name)
         print("username:", username)
         print("password:", password)
@@ -70,13 +64,20 @@ def logout():
     session.pop('username', None)
     return redirect(url_for("login"))
 
+//to direct users to login page when they click onthe navbars profile button
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
+
+
 @app.route('/tip')
 def tip():
-    username = session.get('username', 'User')
-    return render_template('tip.html', username=username)
-    
+    return render_template('tip.html')
+
 @app.route('/userprofile')
 def userprofile():
-    username = session.get('username', 'User')
-    return render_template("userprofile.html", username=username)
-
+    return render_template("userprofile.html")

@@ -6,7 +6,6 @@
   <title>Tips & Strategies - Ctrl+You</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
   <style>
     :root {
       --bg-color: #f8f5e9;
@@ -16,7 +15,6 @@
       --secondary-color: #728c80;
       --highlight-color: #2e3d32;
     }
-
     body.dark {
       --bg-color: #000000; 
       --text-color: #ffffff;
@@ -25,7 +23,6 @@
       --secondary-color: #444444;
       --highlight-color: #ffffff;
     }
-
     body {
       margin: 0;
       font-family: 'Arial', sans-serif;
@@ -37,33 +34,28 @@
       box-sizing: border-box;
       padding-bottom: 80px;
     }
-
     .container {
       width: 100%;
       max-width: 600px;
       margin: 0 auto;
       padding: 15px;
     }
-
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
     }
-
     h2 {
       font-size: 1.5rem;
       margin: 0;
       flex: 1;
       text-align: center;
     }
-
     .checkbox {
       opacity: 0;
       position: absolute;
     }
-
     .checkbox-label {
       background-color: #111; 
       width: 50px;
@@ -76,10 +68,8 @@
       justify-content: space-between;
       align-items: center;
     }
-
     .fa-moon { color: #f1c40f; }
     .fa-sun { color: #f39c12; }
-
     .checkbox-label .ball {
       background-color: #fff;
       width: 22px;
@@ -90,17 +80,14 @@
       border-radius: 50%;
       transition: transform 0.2s linear;
     }
-
     .checkbox:checked + .checkbox-label .ball {
       transform: translateX(24px);
     }
-
     .tips-container {
       max-height: 70vh;
       overflow-y: auto;
       padding-right: 8px;
     }
-
     .tip-card {
       background-color: var(--card-bg);
       color: var(--text-color);
@@ -109,27 +96,21 @@
       margin-bottom: 20px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-
     .tip-card h3 {
       margin: 0 0 8px;
       font-size: 1.2rem;
       color: var(--accent-color);
     }
-
-    /* Dark mode heading and text improvements */
     body.dark .tip-card h3 {
       color: #ffffff;
     }
-
     body.dark .tip-card p {
       color: #e0e0e0;
     }
-
     .tip-card p {
       margin: 0;
       font-size: 0.95rem;
     }
-
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -144,30 +125,25 @@
       box-shadow: 0 -2px 6px rgba(34, 79, 46, 0.212);
       z-index: 100;
     }
-
     .nav-item {
       text-align: center;
       text-decoration: none;
       color: var(--text-color);
       flex: 1;
     }
-
     .nav-item img.nav-icon {
       width: 28px;
       height: 28px;
       display: block;
       margin: 0 auto 4px;
     }
-
     .nav-item p {
       margin: 0;
       font-size: 0.7rem;
     }
-
     .nav-item.active {
       color: var(--accent-color);
     }
-
     .hamburger {
       width: 30px;
       height: 26px;
@@ -176,7 +152,6 @@
       align-items: center;
       cursor: pointer;
     }
-
     .side-menu {
       position: fixed;
       top: 0;
@@ -192,20 +167,17 @@
       transition: left 0.3s ease;
       z-index: 150;
     }
-
     .side-menu a {
       padding: 12px 20px;
       text-decoration: none;
       color: var(--text-color);
       font-size: 1rem;
     }
-
     .side-menu a:hover {
       background-color: var(--accent-color);
       color: white;
       border-radius: 4px;
     }
-
     .side-menu.open {
       left: 0;
     }
@@ -227,7 +199,6 @@
         </label>
       </div>
     </div>
-
     <div class="tips-container">
       <div class="tip-card">
         <h3>Set App Limits</h3>
@@ -251,7 +222,6 @@
       </div>
     </div>
   </div>
-
   <nav class="side-menu" id="side-menu">
     <a href="#">About the app</a>
     <a href="#">Goals</a>
@@ -260,7 +230,6 @@
     <a href="#">Feedback</a>
     <a href="#">Log out</a>
   </nav>
-
   <nav class="bottom-nav">
   <a href="{{ url_for('homepage') }}" class="nav-item">
     <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home" class="nav-icon">
@@ -275,8 +244,6 @@
     <p>Profile</p>
   </a>
 </nav>
-
-
   <script>
     const checkbox = document.getElementById("checkbox");
     checkbox.addEventListener("change", () => {
