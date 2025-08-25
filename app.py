@@ -64,7 +64,7 @@ def logout():
     session.pop('username', None)
     return redirect(url_for("login"))
 
-//to direct users to login page when they click onthe navbars profile button
+#to direct users to login page when they click onthe navbars profile button
 @app.route("/login")
 def login():
     return render_template("login.html")
