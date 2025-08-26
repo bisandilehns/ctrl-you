@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Tips & Strategies - Ctrl+You</title>
+  <title>About the App - Ctrl+You</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -36,7 +36,7 @@
     }
     .container {
       width: 100%;
-      max-width: 600px;
+      max-width: 500px;
       margin: 0 auto;
       padding: 15px;
     }
@@ -45,12 +45,6 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
-    }
-    h2 {
-      font-size: 1.5rem;
-      margin: 0;
-      flex: 1;
-      text-align: center;
     }
     .checkbox {
       opacity: 0;
@@ -83,33 +77,22 @@
     .checkbox:checked + .checkbox-label .ball {
       transform: translateX(24px);
     }
-    .tips-container {
-      max-height: 70vh;
-      overflow-y: auto;
-      padding-right: 8px;
+    .about-container {
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 35px; 
+}
+
+    .about-container h1 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: var(--highlight-color);
     }
-    .tip-card {
-      background-color: var(--card-bg);
-      color: var(--text-color);
-      padding: 15px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .tip-card h3 {
-      margin: 0 0 8px;
-      font-size: 1.2rem;
-      color: var(--accent-color);
-    }
-    body.dark .tip-card h3 {
-      color: #ffffff;
-    }
-    body.dark .tip-card p {
-      color: #e0e0e0;
-    }
-    .tip-card p {
-      margin: 0;
+    .about-container p {
       font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 10px;
     }
     .bottom-nav {
       position: fixed;
@@ -181,6 +164,12 @@
     .side-menu.open {
       left: 0;
     }
+    @media (max-width: 480px) {
+      .container { padding: 10px; }
+      h1 { font-size: 1.3rem; }
+      .nav-item img.nav-icon { width: 24px; height: 24px; }
+      .nav-item p { font-size: 0.65rem; }
+    }
   </style>
 </head>
 <body>
@@ -189,7 +178,6 @@
       <div class="hamburger" id="hamburger">
         <img src="static/images/menu.png" alt="Menu" style="width:26px; height:26px;">
       </div>
-      <h2>Tips & Strategies</h2>
       <div>
         <input type="checkbox" class="checkbox" id="checkbox">
         <label for="checkbox" class="checkbox-label">
@@ -199,50 +187,42 @@
         </label>
       </div>
     </div>
-    <div class="tips-container">
-      <div class="tip-card">
-        <h3>Set App Limits</h3>
-        <p>Use built-in screen time tools to set daily limits for apps that take up too much of your time. Adjust these limits weekly based on your usage to stay balanced without cutting out essential apps.</p>
-      </div>
-      <div class="tip-card">
-        <h3>No Phone in Bed</h3>
-        <p>Charge your phone outside the bedroom to avoid late-night scrolling and improve your sleep quality. Try keeping a notebook nearby for any late-night ideas instead of reaching for your phone.</p>
-      </div>
-      <div class="tip-card">
-        <h3>Replace Scrolling</h3>
-        <p>Keep a book, puzzle, or journal nearby so you have a fun alternative when you’re bored. Even small hobbies like sketching or listening to music can break the scrolling habit.</p>
-      </div>
-      <div class="tip-card">
-        <h3>Tech-Free Breaks</h3>
-        <p>Take short walks, stretch, or do breathing exercises without your phone. Even 5-10 minutes of focused relaxation can boost your mood and productivity.</p>
-      </div>
-      <div class="tip-card">
-        <h3>Track Your Progress</h3>
-        <p>Check your screen time weekly and celebrate small improvements. Reflect on what triggers extra screen time and plan strategies to reduce it gradually.</p>
-      </div>
+    <div class="about-container" id="about-app">
+      <h1>About Ctrl+You</h1>
+      <p><strong>Ctrl+You</strong> is a web app designed to help users manage their phone usage and improve their digital wellbeing. </p>
+     
     </div>
+    <div class="about-container" id="about-app">
+  <h1>How It Works</h1>
+<p>It includes helpful tips and progress visualizations.</p>
+<p>Motivational quotes are provided to encourage healthy screen habits.</p>
+<p>The design is simple, intuitive, and mobile-friendly, so you can easily monitor your daily usage.</p>
+
+</div>
   </div>
-<nav class="side-menu" id="side-menu">
+  <nav class="side-menu" id="side-menu">
   <a href="aboutapp.html">About the App</a>
   <a href="#">Goals</a>
   <a href="#">Self Assessment Quiz</a>
   <a href="#">Contact</a>
 </nav>
 
+
   <nav class="bottom-nav">
-  <a href="{{ url_for('homepage') }}" class="nav-item">
-    <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home" class="nav-icon">
-    <p>Home</p>
-  </a>
-  <a href="{{ url_for('tip') }}" class="nav-item">
-    <img src="{{ url_for('static', filename='images/tip.png') }}" alt="Tips" class="nav-icon">
-    <p>Tips</p>
-  </a>
-  <a href="{{ url_for('userprofile') }}" class="nav-item">
-    <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile" class="nav-icon">
-    <p>Profile</p>
-  </a>
-</nav>
+    <a href="{{ url_for('homepage') }}" class="nav-item">
+      <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home" class="nav-icon">
+      <p>Home</p>
+    </a>
+    <a href="{{ url_for('tip') }}" class="nav-item">
+      <img src="{{ url_for('static', filename='images/tip.png') }}" alt="Tips" class="nav-icon">
+      <p>Tips</p>
+    </a>
+    <a href="{{ url_for('login') }}" class="nav-item">
+      <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile" class="nav-icon">
+      <p>Profile</p>
+    </a>
+  </nav>
+
   <script>
     const checkbox = document.getElementById("checkbox");
     checkbox.addEventListener("change", () => {
@@ -251,19 +231,16 @@
 
     const hamburger = document.getElementById("hamburger");
     const sideMenu = document.getElementById("side-menu");
-
     hamburger.addEventListener("click", (event) => {
       sideMenu.classList.toggle("open");
       event.stopPropagation(); 
     });
-
     const menuLinks = sideMenu.querySelectorAll('a');
     menuLinks.forEach(link => {
       link.addEventListener('click', () => {
         sideMenu.classList.remove('open');
       });
     });
-
     document.addEventListener('click', (event) => {
       if (!sideMenu.contains(event.target) && !hamburger.contains(event.target)) {
         sideMenu.classList.remove('open');
