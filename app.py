@@ -58,6 +58,12 @@ def signup():
         return redirect(url_for("homepage"))
 
     return render_template("signup.html")
+<nav class="side-menu" id="side-menu">
+    <a href="{{ url_for('aboutapp') }}">About the App</a>
+    <a href="#">Goals</a>
+    <a href="#">Self Assessment Quiz</a>
+    <a href="#">Contact</a>
+</nav>
 
 @app.route('/logout')
 def logout():
@@ -71,3 +77,10 @@ def tip():
 @app.route('/userprofile')
 def userprofile():
     return redirect(url_for("login"))
+
+@app.route('/aboutapp')
+def aboutapp():
+    return render_template('aboutapp.html')
+
+
+
