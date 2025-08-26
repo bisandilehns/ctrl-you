@@ -24,8 +24,6 @@ def login():
 
         session['username'] = username
 
-        print("username:", username)
-        print("password:", password)
         return redirect(url_for("homepage")) 
 
     return render_template("login.html")
@@ -50,20 +48,9 @@ def signup():
             flash("Password and confirm password do not match.")
             return redirect(url_for("signup"))
 
-        print("name:", name)
-        print("username:", username)
-        print("password:", password)
-        print("confirm:", confirm)
-
         return redirect(url_for("homepage"))
 
     return render_template("signup.html")
-<nav class="side-menu" id="side-menu">
-    <a href="{{ url_for('aboutapp') }}">About the App</a>
-    <a href="#">Goals</a>
-    <a href="#">Self Assessment Quiz</a>
-    <a href="#">Contact</a>
-</nav>
 
 @app.route('/logout')
 def logout():
@@ -82,5 +69,5 @@ def userprofile():
 def aboutapp():
     return render_template('aboutapp.html')
 
-
-
+if __name__ == "__main__":
+    app.run(debug=True)
