@@ -6,7 +6,9 @@ app.secret_key = 'your_secret_key_here'
 
 @app.route('/')
 def homepage():
-    return render_template("homepage.html")
+    # checks if a user is logged in w their accounr
+    username = session.get("username")
+    return render_template("homepage.html", username=username)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -22,7 +24,8 @@ def login():
             flash("Password must be more than 6 characters.")
             return redirect(url_for("login"))
 
-        session['username'] = username
+        # stores username in session so homepage can use it after saving
+        session['username'] = username  
 
         return redirect(url_for("homepage")) 
 
@@ -48,6 +51,7 @@ def signup():
             flash("Password and confirm password do not match.")
             return redirect(url_for("signup"))
 
+        session['username'] = username  # log them in immediately after signup
         return redirect(url_for("homepage"))
 
     return render_template("signup.html")
@@ -63,11 +67,20 @@ def tip():
 
 @app.route('/userprofile')
 def userprofile():
-    return redirect(url_for("login"))
+    # only if loggedin
+    if 'username' not in session:
+        flash("Please log in to view your profile.")
+        return redirect(url_for("login"))
+    return render_template('userprofile.html', username=session['username'])
 
 @app.route('/aboutapp')
 def aboutapp():
     return render_template('aboutapp.html')
+@app.route('/quiz')
+def quiz():
+    return render_template('quiz.html')
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

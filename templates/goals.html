@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goals</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    body.dark { background: black; color: white; }
+    .hamburger { cursor: pointer; margin-bottom: 10px; }
+    .side-menu { position: fixed; top: 0; left: -200px; width: 200px; height: 100%; background: #ddd; padding: 20px; transition: 0.3s; }
+    .side-menu.open { left: 0; }
+    .goal-inputs input { width: 80px; margin-right: 5px; }
+    .bottom-nav { position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background: #ccc; padding: 10px; }
+  </style>
+</head>
+<body>
+  <div class="hamburger" id="hamburger">☰ Menu</div>
+  {% if username %}
+    <p>Welcome, {{ username }}!</p>
+  {% endif %}
+
+  <label>
+    <input type="checkbox" id="checkbox"> Dark Mode
+  </label>
+
+  <h3>Set your screen time goal</h3>
+  <div class="goal-inputs">
+    <input type="number" id="goal" placeholder="Goal">
+    <input type="number" id="used" placeholder="Used">
+    <button id="update-progress">Update</button>
+  </div>
+  <p id="progress-display">0/0</p>
+
+  <div class="side-menu" id="side-menu">
+    <a href="{{ url_for('aboutapp') }}">About</a>
+    <a href="{{ url_for('goals') }}">Goals</a>
+    <a href="#" id="logout-link">Logout</a>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="{{ url_for('homepage') }}">Home</a>
+    <a href="{{ url_for('tip') }}">Tips</a>
+    <a href="{{ url_for('login') }}">Profile</a>
+  </div>
+
+  <script>
+    const checkbox = document.getElementById("checkbox");
+    checkbox.addEventListener("change", () => document.body.classList.toggle("dark"));
+
+    const hamburger = document.getElementById("hamburger");
+    const sideMenu = document.getElementById("side-menu");
+    hamburger.addEventListener("click", () => sideMenu.classList.toggle("open"));
+
+    const updateButton = document.getElementById('update-progress');
+    const goalInput = document.getElementById('goal');
+    const usedInput = document.getElementById('used');
+    const progressDisplay = document.getElementById('progress-display');
+
+    if (localStorage.getItem('goal') && localStorage.getItem('used')) {
+      progressDisplay.textContent = `${localStorage.getItem('used')}/${localStorage.getItem('goal')}`;
+    }
+
+    updateButton.addEventListener('click', () => {
+      const goal = goalInput.value || 0;
+      const used = usedInput.value || 0;
+      progressDisplay.textContent = `${used}/${goal}`;
+      localStorage.setItem('goal', goal);
+      localStorage.setItem('used', used);
+    });
+
+    const logoutLink = document.getElementById('logout-link');
+    logoutLink.addEventListener('click', () => {
+      localStorage.removeItem('goal');
+      localStorage.removeItem('used');
+      window.location.href = "{{ url_for('logout') }}";
+    });
+  </script>
+</body>
+</html>

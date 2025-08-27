@@ -262,6 +262,9 @@
       <div class="hamburger" id="hamburger">
         <img src="static/images/menu.png" alt="Menu" style="width:26px; height:26px;">
       </div>
+      {% if username %}
+      <span style="font-weight:bold; font-size:0.95rem;">Welcome, {{ username }}!</span>
+    {% endif %}
       <div>
         <input type="checkbox" class="checkbox" id="checkbox">
         <label for="checkbox" class="checkbox-label">
@@ -291,9 +294,8 @@
   </div>
   <nav class="side-menu" id="side-menu">
   <a href="{{ url_for('aboutapp') }}">About the App</a>
-  <a href="#">Goals</a>
-  <a href="#">Self Assessment Quiz</a>
-  <a href="#">Contact</a>
+<a href="{{ url_for('quiz') }}">Self Assessment Quiz</a>
+  <a href="#" id="logout-link">Logout</a>
 </nav>
 
 <nav class="bottom-nav">
@@ -312,42 +314,53 @@
   </a>
 </nav>
 <script>
-  const checkbox = document.getElementById("checkbox");
-  checkbox.addEventListener("change", () => {
-    document.body.classList.toggle("dark");
-  });
+const checkbox = document.getElementById("checkbox");
+checkbox.addEventListener("change", () => {
+  document.body.classList.toggle("dark");
+});
+
 const goalInput = document.getElementById('goal');
-  const usedInput = document.getElementById('used');
-  const updateButton = document.getElementById('update-progress');
-  const progressDisplay = document.getElementById('progress-display');
+const usedInput = document.getElementById('used');
+const updateButton = document.getElementById('update-progress');
+const progressDisplay = document.getElementById('progress-display');
 
-  if (localStorage.getItem('goal') && localStorage.getItem('used')) {
-    progressDisplay.textContent = `${localStorage.getItem('used')}/${localStorage.getItem('goal')}`;
+if (localStorage.getItem('goal') && localStorage.getItem('used')) {
+  progressDisplay.textContent = `${localStorage.getItem('used')}/${localStorage.getItem('goal')}`;
+}
+
+updateButton.addEventListener('click', () => {
+  const goal = goalInput.value || 0;
+  const used = usedInput.value || 0;
+  progressDisplay.textContent = `${used}/${goal}`;
+  localStorage.setItem('goal', goal);
+  localStorage.setItem('used', used);
+});
+
+const hamburger = document.getElementById("hamburger");
+const sideMenu = document.getElementById("side-menu");
+hamburger.addEventListener("click", (event) => {
+  sideMenu.classList.toggle("open");
+  event.stopPropagation(); 
+});
+const menuLinks = sideMenu.querySelectorAll('a');
+menuLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    sideMenu.classList.remove('open');
+  });
+});
+document.addEventListener('click', (event) => {
+  if (!sideMenu.contains(event.target) && !hamburger.contains(event.target)) {
+    sideMenu.classList.remove('open');
   }
+});
 
-  updateButton.addEventListener('click', () => {
-    const goal = goalInput.value || 0;
-    const used = usedInput.value || 0;
-    progressDisplay.textContent = `${used}/${goal}`;
-    localStorage.setItem('goal', goal);
-    localStorage.setItem('used', used);
-  });
-
-  const hamburger = document.getElementById("hamburger");
-  const sideMenu = document.getElementById("side-menu");
-  hamburger.addEventListener("click", (event) => {
-    sideMenu.classList.toggle("open");
-    event.stopPropagation(); 
-  });
-  const menuLinks = sideMenu.querySelectorAll('a');
-  menuLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      sideMenu.classList.remove('open');
-    });
-  });
-  document.addEventListener('click', (event) => {
-    if (!sideMenu.contains(event.target) && !hamburger.contains(event.target)) {
-      sideMenu.classList.remove('open');
-    }
-  });
+// LOGOUT BUTTON 
+const logoutLink = document.getElementById('logout-link');
+logoutLink.addEventListener('click', () => {
+  // Clear localStorage data when thet logout
+  localStorage.removeItem('goal');
+  localStorage.removeItem('used');
+  // Redirect to logout of flask (to clear the data from previosu session)
+  window.location.href = "{{ url_for('logout') }}";
+});
 </script>

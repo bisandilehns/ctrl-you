@@ -201,10 +201,9 @@
 </div>
   </div>
   <nav class="side-menu" id="side-menu">
-<a href="{{ url_for('aboutapp') }}">About the App</a>
-  <a href="#">Goals</a>
-  <a href="#">Self Assessment Quiz</a>
-  <a href="#">Contact</a>
+  <a href="{{ url_for('aboutapp') }}">About the App</a>
+  <a href="{{ url_for('quiz') }}">Self Assessment Quiz</a>
+  <a href="#" id="logout-link">Logout</a>
 </nav>
 
 
@@ -245,6 +244,12 @@
       if (!sideMenu.contains(event.target) && !hamburger.contains(event.target)) {
         sideMenu.classList.remove('open');
       }
+      const logoutLink = document.getElementById('logout-link');
+logoutLink.addEventListener('click', () => {
+    localStorage.removeItem('goal');
+    localStorage.removeItem('used');
+    window.location.href = "{{ url_for('logout') }}";
+});
     });
   </script>
 </body>
