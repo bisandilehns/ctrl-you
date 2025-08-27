@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
   <style>
     body {
       margin: 0;
@@ -40,10 +39,15 @@
     }
     input {
       padding: 10px!important;
-      margin-bottom: 15px!important;
+      margin-bottom: 10px!important;
       border: 1px solid #ccc!important;
       border-radius: 6px!important;
       font-size: 1rem!important;
+    }
+    label.show-pass {
+      margin-bottom: 15px;
+      font-weight: normal;
+      font-size: 0.9rem;
     }
     button {
       padding: 10px!important;
@@ -53,18 +57,17 @@
       border-radius: 6px!important;
       font-size: 1rem!important;
       cursor: pointer!important;
+      margin-top: 5px;
     }
     button:hover {
       background-color: #3f4e44!important;
     }
   </style>
 </head> 
-
 <body>
   <div class="container">
     <a href="{{ url_for('homepage') }}" class="back-arrow">⬅</a>
     <h1>Sign Up</h1>
-
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <div class="alert alert-warning" role="alert" style="margin-bottom: 15px;">
@@ -74,22 +77,33 @@
         </div>
       {% endif %}
     {% endwith %}
-
     <form action="/signup" method="post">
       <label for="yourname">Your Name</label>
       <input type="text" id="yourname" name="yourname" placeholder="Your Name" required>
-
       <label for="username">Username</label>
       <input type="text" name="username" required pattern="[A-Za-z]+" minlength="5" title="Only letters are allowed" placeholder="Enter a username">
-
       <label for="password">Password</label>
-      <input type="password" name="password" required minlength="6" title="Please choose at least 6 characters" placeholder="Enter your password">
-
-      <label for="confirm_password">Confirm Password</label>
+      <input type="password" id="password" name="password" required minlength="6" title="Please choose at least 6 characters" placeholder="Enter your password">
+      <label for="confirm">Confirm Password</label>
       <input type="password" id="confirm" name="confirm" required placeholder="Confirm password">
-
+      <label class="show-pass">
+        <input type="checkbox" onclick="togglePassword()"> Show Passwords
+      </label>
       <button type="submit">Sign Up</button>
     </form>
   </div>
+  <script>
+    function togglePassword() {
+      var pass = document.getElementById("password");
+      var confirm = document.getElementById("confirm");
+      if (pass.type === "password") {
+        pass.type = "text";
+        confirm.type = "text";
+      } else {
+        pass.type = "password";
+        confirm.type = "password";
+      }
+    }
+  </script>
 </body>
 </html>

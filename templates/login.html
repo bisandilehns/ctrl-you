@@ -45,6 +45,7 @@
       font-size: 1rem !important;
     }
     button {
+      margin-top: 0.1px !important;
       padding: 10px !important;
       background-color: #2e3d32 !important;
       color: white !important;
@@ -71,23 +72,39 @@
 <body>
   <div class="container">
     {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash">
-          {% for message in messages %}
-            <p>{{ message }}</p>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endwith %}
+  {% if messages %}
+    <div class="flash">
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
     <a href="{{ url_for('homepage') }}" class="back-arrow">⬅</a>
     <h1>Login</h1>
    <form action="{{ url_for('login') }}" method="post">
   <label for="username">Username</label>
-  <input type="text" name="username" required pattern="[A-Za-z]+" required minlength="5" title="Only letters are allowed" placeholder="Enter a username">
-  <label for="password">Password</label>
-  <input type="password" name="password" required minlength="6" title="Please choose at least 6 characters" placeholder="Enter your password">
+  <input type="text" name="username" required pattern="[A-Za-z]+" minlength="5" title="Only letters are allowed" placeholder="Enter a username">
+  <label for="myInput">Password</label>
+  <input type="password" id="myInput" name="password" required minlength="6" title="Please choose at least 6 characters" placeholder="Enter your password">
+  <label style="margin-top:6px;">
+    <input type="checkbox" onclick="myFunction()"> Show Password
+  </label>
+  <br>
+
   <button type="submit">Login</button>
 </form>
+<script>
+function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 <p>Don't have an account? 
    <a href="{{ url_for('signup') }}">Create a new account</a>
 </p>
