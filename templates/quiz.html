@@ -117,35 +117,32 @@ hamburger.addEventListener("click",e=>{sideMenu.classList.toggle("open");e.stopP
 sideMenu.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>{sideMenu.classList.remove('open');});});
 document.addEventListener('click',e=>{if(!sideMenu.contains(e.target)&&!hamburger.contains(e.target)){sideMenu.classList.remove('open');}});
 
-document.getElementById('logout-link').addEventListener('click',()=>{
-  window.location.href="{{ url_for('logout') }}";
-});
-document.getElementById('submit-quiz').addEventListener('click',()=>{
-  let score = 0;
-  const answers = ['q1','q2','q3','q4','q5','q6','q7'];
-  const totalQuestions = answers.length;
+document.getElementById('submit-quiz').addEventListener('click', (e) => {
+  e.preventDefault(); // stop default form submission
 
-  answers.forEach(q=>{
-    const val = document.querySelector(`input[name="${q}"]:checked`);
-    if(val) score += parseInt(val.value);
-  });
+  const totalQuestions = 7;
+  let answered = document.querySelectorAll('input[type="radio"]:checked').length;
 
-  const maxScore = totalQuestions * 3; //the max points is 3 per qeustion 
-  const percent = Math.round((score / maxScore) * 100); //  percentage
-
-
-  // givesthem feedback based on the percentages 
-  let feedback;
-  if(percent <= 45){
-    feedback = `Hi, your phone usage is low (${percent}%). Keep up the great job!`;
-  } else if(percent <= 65){
-    feedback = `Hi, your phone usage is moderate (${percent}%). Try to reduce it a bit. You can do it !`;
-  } else{
-    feedback = `Hi, your phone usage is high (${percent}%). Consider taking breaks and You can have a look at the tips page and consider following such stratergies ! Good Luck !`;
+  if(answered < totalQuestions){
+    alert("Please answer all questions before submitting!");
+    return;
   }
+
+  // now calculate score
+  let score = 0;
+  for(let i = 1; i <= totalQuestions; i++){
+    score += parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+  }
+
+  let percent = Math.round((score / (totalQuestions * 3)) * 100);
+  let feedback = "";
+  if(percent <= 45) feedback = `Hi, your phone usage is low (${percent}%). Keep up the great job!`;
+  else if(percent <= 65) feedback = `Hi, your phone usage is moderate (${percent}%). Try to reduce it a bit. You can do it!`;
+  else feedback = `Hi, your phone usage is high (${percent}%). Consider taking breaks and check the tips page!`;
 
   document.getElementById('result-box').textContent = feedback;
 });
+
 </script>
 </body>
 </html>

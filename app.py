@@ -65,7 +65,6 @@ def login():
         # stores username in session so homepage can use it after saving
         if check_user(username, password):
             session['username'] = username
-            flash(f"Welcome back, {username}!")
             return redirect(url_for("homepage"))
         else:
             flash("Login unsuccessful: incorrect username or password.")
@@ -113,13 +112,22 @@ def logout():
 def tip():
     return render_template('tip.html')
 
+from datetime import datetime
+
 @app.route('/userprofile')
 def userprofile():
-    # only if logged in
-    if 'username' not in session:
-        flash("Please log in to view your profile.")
-        return redirect(url_for("login"))
-    return render_template('userprofile.html', username=session['username'])
+    username = session.get('username')
+    if username:
+        # user is logged in → show profile info
+        return render_template(
+            'userprofile.html',
+            username=username,
+            join_date=datetime.now().strftime("%B %d, %Y")  # placeholder
+        )
+    else:
+        # user not logged in → show login/signup form
+        return render_template('login.html')
+
 
 @app.route('/aboutapp')
 def aboutapp():
