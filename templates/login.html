@@ -61,13 +61,27 @@
       box-shadow: 0 0 5px rgba(46, 61, 50, 0.3) !important;
       outline: none !important;
     }
+    .flash p {
+    color: red;
+    margin: 0 0 10px 0;
+}
   </style>
 </head>
+
 <body>
   <div class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
     <a href="{{ url_for('homepage') }}" class="back-arrow">⬅</a>
     <h1>Login</h1>
-   <form action="/login" method="post">
+   <form action="{{ url_for('login') }}" method="post">
   <label for="username">Username</label>
   <input type="text" name="username" required pattern="[A-Za-z]+" required minlength="5" title="Only letters are allowed" placeholder="Enter a username">
   <label for="password">Password</label>
