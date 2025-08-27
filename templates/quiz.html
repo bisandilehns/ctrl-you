@@ -59,6 +59,36 @@
       <label><input type="radio" name="q2" value="2"> Sometimes</label>
       <label><input type="radio" name="q2" value="3"> Often</label>
     </div>
+    <div class="quiz-card">
+      <h2>3. How often do you use your phone right before sleeping?</h2>
+      <label><input type="radio" name="q3" value="1"> Rarely</label>
+      <label><input type="radio" name="q3" value="2"> Sometimes</label>
+      <label><input type="radio" name="q3" value="3"> Often</label>
+    </div>
+    <div class="quiz-card">
+  <h2>4. Do you feel anxious if you can’t check your phone?</h2>
+  <label><input type="radio" name="q4" value="1"> Not at all</label>
+  <label><input type="radio" name="q4" value="2"> Sometimes</label>
+  <label><input type="radio" name="q4" value="3"> Very often</label>
+</div>
+    <div class="quiz-card">
+  <h2>5. How often do you use your phone during meals or conversations?</h2>
+  <label><input type="radio" name="q5" value="1"> Rarely</label>
+  <label><input type="radio" name="q5" value="2"> Sometimes</label>
+  <label><input type="radio" name="q5" value="3"> Often</label>
+</div>
+<div class="quiz-card">
+  <h2>6. How often do you check social media without meaning to?</h2>
+  <label><input type="radio" name="q6" value="1"> Rarely</label>
+  <label><input type="radio" name="q6" value="2"> Sometimes</label>
+  <label><input type="radio" name="q6" value="3"> Very often</label>
+</div>
+<div class="quiz-card">
+  <h2>7. Do you take breaks from your phone during the day?</h2>
+  <label><input type="radio" name="q7" value="1"> Yes, regularly</label>
+  <label><input type="radio" name="q7" value="2"> Occasionally</label>
+  <label><input type="radio" name="q7" value="3"> Rarely</label>
+</div>
 
     <button class="submit-btn" id="submit-quiz">Submit</button>
     <div class="result-box" id="result-box"></div>
@@ -90,17 +120,31 @@ document.addEventListener('click',e=>{if(!sideMenu.contains(e.target)&&!hamburge
 document.getElementById('logout-link').addEventListener('click',()=>{
   window.location.href="{{ url_for('logout') }}";
 });
-
 document.getElementById('submit-quiz').addEventListener('click',()=>{
-  let score=0;
-  const answers=['q1','q2'];
+  let score = 0;
+  const answers = ['q1','q2','q3','q4','q5','q6','q7'];
+  const totalQuestions = answers.length;
+
   answers.forEach(q=>{
-    const val=document.querySelector(`input[name="${q}"]:checked`);
-    if(val) score+=parseInt(val.value);
+    const val = document.querySelector(`input[name="${q}"]:checked`);
+    if(val) score += parseInt(val.value);
   });
-  const username="{{ username }}" || "User";
-  let feedback="You scored "+score+" points, "+username+"!";
-  document.getElementById('result-box').textContent=feedback;
+
+  const maxScore = totalQuestions * 3; //the max points is 3 per qeustion 
+  const percent = Math.round((score / maxScore) * 100); //  percentage
+
+
+  // givesthem feedback based on the percentages 
+  let feedback;
+  if(percent <= 45){
+    feedback = `Hi, your phone usage is low (${percent}%). Keep up the great job!`;
+  } else if(percent <= 65){
+    feedback = `Hi, your phone usage is moderate (${percent}%). Try to reduce it a bit. You can do it !`;
+  } else{
+    feedback = `Hi, your phone usage is high (${percent}%). Consider taking breaks and You can have a look at the tips page and consider following such stratergies ! Good Luck !`;
+  }
+
+  document.getElementById('result-box').textContent = feedback;
 });
 </script>
 </body>
