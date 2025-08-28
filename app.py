@@ -13,9 +13,7 @@ def init_db():
     ''')
     conn.commit()
     conn.close()
-
 init_db()
-
 def add_user(username, password):
     """Add a new user. Returns True if successful, False if username exists."""
     conn = sqlite3.connect('users.db')
@@ -28,7 +26,6 @@ def add_user(username, password):
         return False
     finally:
         conn.close()
-
 def check_user(username, password):
     """Check if a user exists with the given password."""
     conn = sqlite3.connect('users.db')
@@ -37,23 +34,30 @@ def check_user(username, password):
     user = c.fetchone()
     conn.close()
     return user is not None
-
-
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 
 @app.route('/')
 def homepage():
-    # checks if a user is logged in w their account
+    # If the user is not logged in, redirect to login page
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    
+    # If logged in, show homepage
     username = session.get("username")
     return render_template("homepage.html", username=username)
 
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    # Redirects already logged-in users to homepaeg
+    if 'username' in session:
+        return redirect(url_for("homepage"))
+
     if request.method == "POST":
         username = request.form.get("username", "")
         password = request.form.get("password", "")
-         
+
         if not username.isalpha():
             flash("Username must contain only letters.")
             return render_template("login.html")
@@ -62,7 +66,6 @@ def login():
             flash("Password must be more than 6 characters.")
             return render_template("login.html")
 
-        # stores username in session so homepage can use it after saving
         if check_user(username, password):
             session['username'] = username
             return redirect(url_for("homepage"))
@@ -71,6 +74,7 @@ def login():
             return render_template("login.html")
     
     return render_template("login.html")
+
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -83,15 +87,12 @@ def signup():
         if not username.isalpha():
             flash("Username must contain only letters.")
             return redirect(url_for("signup"))
-
         if len(password) < 7:
             flash("Password must be more than 6 characters.")
             return redirect(url_for("signup"))
-
         if password != confirm:
             flash("Password and confirm password do not match.")
             return redirect(url_for("signup"))
-
         if add_user(username, password):
             session['username'] = username  # log them in immediately
             flash("Account created successfully!")
@@ -99,21 +100,15 @@ def signup():
         else:
             flash("Username already exists!")
             return redirect(url_for("signup"))
-
     return render_template("signup.html")
-
-
 @app.route('/logout')
 def logout():
     session.pop('username', None)
     return redirect(url_for("login"))
-
 @app.route('/tip')
 def tip():
     return render_template('tip.html')
-
 from datetime import datetime
-
 @app.route('/userprofile')
 def userprofile():
     username = session.get('username')
@@ -127,8 +122,6 @@ def userprofile():
     else:
         # user not logged in → show login/signup form
         return render_template('login.html')
-
-
 @app.route('/aboutapp')
 def aboutapp():
     return render_template('aboutapp.html')
@@ -136,7 +129,6 @@ def aboutapp():
 @app.route('/quiz')
 def quiz():
     return render_template('quiz.html')
-
 
 if __name__ == "__main__":
     app.run(debug=True)
